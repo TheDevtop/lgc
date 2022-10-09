@@ -1,0 +1,41 @@
+%K label
+%A Author name
+%D 2022
+%T Title
+
+%K moore65
+%A Gorden E. Moore
+%D 1965
+%T Cramming more components onto integrated circuits
+
+%K cpufreq
+%A IEEE
+%D 31 March 2008
+%T Why CPU Frequency Stalled
+
+%K dvfs
+%A Etienne Le Sueur
+%A Gernot Heiser
+%D 2013
+%T Dynamic Voltage and Frequency Scaling: The Laws of Diminishing Returns
+
+%K pi4
+%A Raspberry Pi Foundation
+%D 24 June 2019
+%T Raspberry Pi 4 Tech Specs
+%O https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/
+
+%K gccarch
+%A Free Software Foundation
+%D 28 July 2021
+%T Status of Supported Architectures from Maintainers' Point of View
+%O https://gcc.gnu.org/backends.html
+
+%K overhead
+%A Zheng Li
+%A Maria Kihl
+%A Qinghua Lu
+%A Jens A. Anderson
+%D May 2017
+%T Performance Overhead Comparison between Hypervisor and Container Based Virtualization
+
