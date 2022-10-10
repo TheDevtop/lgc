@@ -39,3 +39,20 @@
 %D May 2017
 %T Performance Overhead Comparison between Hypervisor and Container Based Virtualization
 
+%K k8sarch
+%A The Kubernetes Authors
+%D 23 July 2022
+%T Kubernetes Components
+%O https://kubernetes.io/docs/concepts/overview/components/
+
+%K mesosarch
+%A The Apache Software Foundation
+%D 2022
+%T Mesos Architecture
+%O https://mesos.apache.org/documentation/latest/architecture/
+
+%K plan9arch
+%A Bell Laboratories
+%D 1995
+%T Plan 9 from Bell Labs
+

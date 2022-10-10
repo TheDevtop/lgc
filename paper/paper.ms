@@ -46,4 +46,51 @@ however this can (depending on the workload) introduce significant overhead,
 overhead
 .]
 even more so on a low powered machine.
-
+A much simpler option is to have a set of centrally orchestrated computers,
+here the only bottleneck is the supported architectures of the orchestration software.
+This type of software is known as "cluster orchestation" software.
+.SH
+Product research:
+.PP
+Since the breaktrough of cloud computing in the 2010's,
+there have been several products that orchestrate and coordinate clusters.
+In this section we will cover a few.
+.PP
+.B "Kubernetes:"
+Kubernetes is a popular cluster orchestrator for application containers.
+.[
+k8sarch
+.]
+It's primarily made for datacenter size installations,
+it has many features which makes it less suitable for our deployment situation.
+However the overall architecture is highly structured and a good starting point for our system.
+.PP
+.B "Apache Mesos:"
+Mesos is a cluster scheduler,
+it's possible to attach other cluster software (like Kubernetes) to it.
+.[
+mesosarch
+.]
+Altough it poses many interesting ideas about scheduling,
+networking,
+and data locality.
+But many of these things are out of scope.
+It would be an interesting idea to integrate LGC with Apache Mesos,
+this would be considered future work tough.
+.PP
+.B "Plan 9:"
+This is the operating system developed after Bell Labs ended with UNIX.
+It is not a cluster orchestrator,
+but rather a distributed operating system.
+.[
+plan9arch
+.]
+What makes Plan 9 interesting is it's file protocol called 9P.
+With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where a local filesystem.
+And I would like this idea of a central filesystem to be part of LGC.
+This also solves the data locality problem.
+.SH
+Requirements:
+.PP
+In this section we will list the requirements,
+and explain them in further detail.
