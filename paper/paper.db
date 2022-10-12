@@ -56,3 +56,9 @@
 %D 1995
 %T Plan 9 from Bell Labs
 
+%K runarch
+%A GitLab Inc.
+%D 21 July 2022
+%T GitLab Runner
+%O https://docs.gitlab.com/runner/
+

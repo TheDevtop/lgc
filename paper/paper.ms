@@ -68,15 +68,15 @@ However the overall architecture is highly structured and a good starting point 
 .B "Apache Mesos:"
 Mesos is a cluster scheduler,
 it's possible to attach other cluster software (like Kubernetes) to it.
-.[
-mesosarch
-.]
 Altough it poses many interesting ideas about scheduling,
 networking,
 and data locality.
-But many of these things are out of scope.
+.[
+mesosarch
+.]
+Many of these things are out of scope.
 It would be an interesting idea to integrate LGC with Apache Mesos,
-this would be considered future work tough.
+but this would be considered future work.
 .PP
 .B "Plan 9:"
 This is the operating system developed after Bell Labs ended with UNIX.
@@ -86,11 +86,42 @@ but rather a distributed operating system.
 plan9arch
 .]
 What makes Plan 9 interesting is it's file protocol called 9P.
-With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where a local filesystem.
-And I would like this idea of a central filesystem to be part of LGC.
-This also solves the data locality problem.
+With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where local.
+Combining a remote filesystem with LGC would greatly simplify the operation of the cluster,
+and solve the data locality problem.
+.PP
+.B "Runners:"
+GitLab Runners are part of the GitLab CI/CD system,
+with which build jobs can be executed.
+It has many features which won't be considered for LGC,
+but it's programming model/execution flow,
+.[
+runarch
+.]
+is simple enough to be implemented by a single person.
+Altough it is not cluster orchistrator,
+it can be used in a distributed manner.
 .SH
 Requirements:
 .PP
-In this section we will list the requirements,
-and explain them in further detail.
+This section  lists the requirements.
+.IP \1
+The user can communicate with the cluster via a program called
+.I "lgcadm."
+.IP \2
+The user can publish a build job to the cluster.
+.IP \3
+The user can retrieve information or artifacts from the cluster.
+.IP \4
+The user does not need to know the composition of the cluster.
+.SH
+Evaluation:
+.PP
+Currently there are two ways to solve this problem.
+The first option is to build a cluster orchistrator that manages services,
+one of which will be a build service.
+This makes the implementation of the build service secondary.
+The second option is to build a multi-node build service,
+this will be easier but will exclude the implementation of a full cluster orchestrator.
+.PP
+Currently i'm torn.
