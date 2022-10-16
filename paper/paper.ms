@@ -4,7 +4,7 @@ Little Green Clusters (Draft)
 Thijs Haker
 .AI
 Fontys Hogescholen
-.SH
+.NH
 Problem statement:
 .PP
 Since the dawn of computing in the 1960's, there is, and has been, a consistent tendency to run medium to high workloads on high power machines.
@@ -13,7 +13,7 @@ Moreover, a subset of these medium sized jobs (like compiling software), run for
 .PP
 Because of the risings in enegery cost, we would like to optimize our energy effeciency over computation.
 And because compiling software is very widespread we will focus on this job.
-.SH
+.NH
 Background research:
 .PP
 Around 2008 the industry released their CPU's with the highest clock rate, 
@@ -49,14 +49,15 @@ even more so on a low powered machine.
 A much simpler option is to have a set of centrally orchestrated computers,
 here the only bottleneck is the supported architectures of the orchestration software.
 This type of software is known as "cluster orchestation" software.
-.SH
+.NH
 Product research:
 .PP
 Since the breaktrough of cloud computing in the 2010's,
 there have been several products that orchestrate and coordinate clusters.
-In this section we will cover a few.
+In this section we will cover a few:
+.NH 2
+Kubernetes:
 .PP
-.B "Kubernetes:"
 Kubernetes is a popular cluster orchestrator for application containers.
 .[
 k8sarch
@@ -64,8 +65,9 @@ k8sarch
 It's primarily made for datacenter size installations,
 it has many features which makes it less suitable for our deployment situation.
 However the overall architecture is highly structured and a good starting point for our system.
+.NH 2 
+Apache Mesos:
 .PP
-.B "Apache Mesos:"
 Mesos is a cluster scheduler,
 it's possible to attach other cluster software (like Kubernetes) to it.
 Altough it poses many interesting ideas about scheduling,
@@ -77,8 +79,9 @@ mesosarch
 Many of these things are out of scope.
 It would be an interesting idea to integrate LGC with Apache Mesos,
 but this would be considered future work.
+.NH 2
+Plan 9:
 .PP
-.B "Plan 9:"
 This is the operating system developed after Bell Labs ended with UNIX.
 It is not a cluster orchestrator,
 but rather a distributed operating system.
@@ -89,8 +92,9 @@ What makes Plan 9 interesting is it's file protocol called 9P.
 With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where local.
 Combining a remote filesystem with LGC would greatly simplify the operation of the cluster,
 and solve the data locality problem.
+.NH 2
+Runners:
 .PP
-.B "Runners:"
 GitLab Runners are part of the GitLab CI/CD system,
 with which build jobs can be executed.
 It has many features which won't be considered for LGC,
@@ -101,27 +105,54 @@ runarch
 is simple enough to be implemented by a single person.
 Altough it is not cluster orchistrator,
 it can be used in a distributed manner.
-.SH
+.NH
 Requirements:
-.PP
-This section  lists the requirements.
 .IP \1
-The user can communicate with the cluster via a program called
-.I "lgcadm."
+The user can pick and choose which parts of the cluster to deploy.
 .IP \2
-The user can publish a build job to the cluster.
+The user can publish a service to the cluster.
 .IP \3
-The user can retrieve information or artifacts from the cluster.
+The user can bind a published service to the API server.
 .IP \4
-The user does not need to know the composition of the cluster.
-.SH
+The service can retrieve/store state from a centrally managed database.
+.IP \5
+The service can output it's messages to a centrally managed logging system.
+.IP \6
+The service can have any underlying system or platform.
+.IP \6
+The user can manage the cluster via the operating system console.
+.NH
 Evaluation:
 .PP
-Currently there are two ways to solve this problem.
+There are two ways to solve this problem:
 The first option is to build a cluster orchistrator that manages services,
-one of which will be a build service.
-This makes the implementation of the build service secondary.
+and makes them exportable to the internet.
+This will make the implementation of any build service secondary.
 The second option is to build a multi-node build service,
 this will be easier but will exclude the implementation of a full cluster orchestrator.
 .PP
-Currently i'm torn.
+In the end I decided to design and implement a cluster orchistrator.
+For both the reason that my interests are more aligned,
+and the reason that there is more space to innovate.
+.NH
+Design & Implementation:
+.PP
+Little Green Cluster or
+.B "LGC",
+is a portable and elegant orchestration system for small computer clusters.
+It lends its microservice design from Kubernetes,
+.[
+k8sarch
+.]
+and is written in Go both for portability,
+and because it was made for system and server software.
+.[
+golang
+.]
+The rest of this section can be found in a seperate document called:
+.I "The design and implementation of LGC".
+.NH
+Conclusion:
+.NH 2
+Future work:
+

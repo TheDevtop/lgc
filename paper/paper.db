@@ -62,3 +62,9 @@
 %T GitLab Runner
 %O https://docs.gitlab.com/runner/
 
+%K golang
+%A Google Inc.
+%D 2022
+%T Why Go - Use cases
+%O https://go.dev/solutions/#use-cases
+
