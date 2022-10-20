@@ -9,6 +9,7 @@ import (
 	"github.com/TheDevtop/lgc/clu/lib"
 )
 
+// Add job
 func apiAdd(w http.ResponseWriter, r *http.Request) {
 	var (
 		err error
@@ -17,10 +18,12 @@ func apiAdd(w http.ResponseWriter, r *http.Request) {
 
 	if jd, err = lib.ReadJobDesc(r.Body); err != nil {
 		log.Printf("apiAdd: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 	if err = jSched.Enqueue(jd); err != nil {
 		log.Printf("apiAdd: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 
@@ -28,6 +31,7 @@ func apiAdd(w http.ResponseWriter, r *http.Request) {
 	log.Printf("apiAdd: Job %s queued\n", jd.Name)
 }
 
+// Delete job
 func apiDelete(w http.ResponseWriter, r *http.Request) {
 	var (
 		err error
@@ -36,10 +40,12 @@ func apiDelete(w http.ResponseWriter, r *http.Request) {
 
 	if jd, err = lib.ReadJobDesc(r.Body); err != nil {
 		log.Printf("apiDelete: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 	if err = jSched.Dequeue(jd.Name); err != nil {
 		log.Printf("apiDelete: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 
@@ -47,6 +53,7 @@ func apiDelete(w http.ResponseWriter, r *http.Request) {
 	log.Printf("apiDelete: Job %s removed from queue\n", jd.Name)
 }
 
+// Start job
 func apiStart(w http.ResponseWriter, r *http.Request) {
 	var (
 		err error
@@ -55,10 +62,12 @@ func apiStart(w http.ResponseWriter, r *http.Request) {
 
 	if jd, err = lib.ReadJobDesc(r.Body); err != nil {
 		log.Printf("apiStart: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 	if err = jSched.Start(jd.Name); err != nil {
 		log.Printf("apiStart: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 
@@ -66,6 +75,7 @@ func apiStart(w http.ResponseWriter, r *http.Request) {
 	log.Printf("apiStart: Job %s started\n", jd.Name)
 }
 
+// Stop job
 func apiStop(w http.ResponseWriter, r *http.Request) {
 	var (
 		err error
@@ -74,10 +84,12 @@ func apiStop(w http.ResponseWriter, r *http.Request) {
 
 	if jd, err = lib.ReadJobDesc(r.Body); err != nil {
 		log.Printf("apiStop: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 	if err = jSched.Stop(jd.Name); err != nil {
 		log.Printf("apiStop: %s\n", err)
+		fmt.Fprint(w, err)
 		return
 	}
 
@@ -85,6 +97,7 @@ func apiStop(w http.ResponseWriter, r *http.Request) {
 	log.Printf("apiStop: Job %s stopped\n", jd.Name)
 }
 
+// Print list of jobs
 func apiList(w http.ResponseWriter, r *http.Request) {
 	var (
 		err error

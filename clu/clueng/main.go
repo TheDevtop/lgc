@@ -12,7 +12,7 @@ import (
 const (
 	verStr     = "LGC Cluster Engine Mk%d\n"
 	verInt     = 2
-	configPath = "./clueng.json"
+	configPath = "/etc/cluster.json"
 	configPerm = 0o644
 )
 
@@ -79,7 +79,7 @@ func main() {
 	// Welcome message
 	log.Printf(verStr, verInt)
 
-	// Allocate jobMap
+	// Allocate job scheduler
 	jSched = make(lib.JobScheduler)
 
 	// Load config and restart enabled jobs
