@@ -68,15 +68,17 @@ func (js JobScheduler) Stop(name string) error {
 	if !job.Desc.Enabled {
 		return fmt.Errorf("Error job %s already disabled", name)
 	}
-
-	// Kill free process resources
-	job.Proc.Process.Kill()
-	err = job.Proc.Wait()
+	if job.Proc != nil {
+		// Kill free process resources
+		job.Proc.Process.Kill()
+		err = job.Proc.Wait()
+	}
 
 	// Disable job and remove proc structure
 	job.Desc.Enabled = false
 	job.Proc = nil
 
+	// Write job back and return any errors
 	js[name] = job
 	if err != nil {
 		return err
