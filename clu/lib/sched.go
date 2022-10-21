@@ -58,7 +58,6 @@ func (js JobScheduler) Start(name string) error {
 func (js JobScheduler) Stop(name string) error {
 	var (
 		job Job
-		err error
 		ok  bool
 	)
 
@@ -71,19 +70,15 @@ func (js JobScheduler) Stop(name string) error {
 	if job.Proc != nil {
 		// Kill free process resources
 		job.Proc.Process.Kill()
-		err = job.Proc.Wait()
+		job.Proc.Wait()
 	}
 
 	// Disable job and remove proc structure
 	job.Desc.Enabled = false
 	job.Proc = nil
 
-	// Write job back and return any errors
+	// Write job back
 	js[name] = job
-	if err != nil {
-		return err
-	}
-
 	return nil
 }
 
