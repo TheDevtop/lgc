@@ -1,8 +1,10 @@
 package cmd
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 
@@ -11,8 +13,11 @@ import (
 
 func ListMain() int {
 	var (
-		//res *http.Response
-		err error
+		res    *http.Response
+		err    error
+		buf    []byte
+		jobMap = make(map[string]lib.JobDesc)
+		job    lib.JobDesc
 	)
 
 	// Assign and parse flags
@@ -20,9 +25,20 @@ func ListMain() int {
 	flag.Parse()
 
 	// Fetch response from server
-	if _, err = http.Get(fmt.Sprintf(urlFormat, *flagHost, lib.RouteList)); err != nil {
+	if res, err = http.Get(fmt.Sprintf(urlFormat, *flagHost, lib.RouteList)); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return exitErr
+	}
+	if buf, err = io.ReadAll(res.Body); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return exitErr
+	}
+	if err = json.Unmarshal(buf, &jobMap); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return exitErr
+	}
+	for _, job = range jobMap {
+		fmt.Printf("Name: \"%s\" Enabled: \"%t\" Command: \"%s\"\n", job.Name, job.Enabled, job.CmdName)
 	}
 
 	return exitDef
