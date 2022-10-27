@@ -11,13 +11,13 @@ import (
 
 const (
 	verStr     = "LGC Cluster Engine Mk%d\n"
-	verInt     = 2
+	verInt     = 3
 	configPath = "/etc/cluster.json"
 	configPerm = 0o644
 )
 
 // Global job scheduler
-var jSched lib.JobScheduler
+var jSched JobScheduler
 
 // Load job descriptors fromt config file
 func loadConfig() {
@@ -36,7 +36,7 @@ func loadConfig() {
 		return
 	}
 
-	jSched = make(lib.JobScheduler, len(jl))
+	jSched = make(JobScheduler, len(jl))
 	for _, jd := range jl {
 		if err = jSched.Enqueue(jd); err != nil {
 			log.Println(err)
@@ -80,7 +80,7 @@ func main() {
 	log.Printf(verStr, verInt)
 
 	// Allocate job scheduler
-	jSched = make(lib.JobScheduler)
+	jSched = make(JobScheduler)
 
 	// Load config and restart enabled jobs
 	loadConfig()
