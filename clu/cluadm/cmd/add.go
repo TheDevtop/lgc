@@ -42,15 +42,15 @@ func AddMain() int {
 	body = bytes.NewReader(buf)
 
 	// Post to cluster engine and receive response
-	if resp, err = http.Post(fmt.Sprintf(urlFormat, *flagHost, lib.RouteAdd), jsonMime, body); err != nil {
+	if resp, err = http.Post(fmt.Sprintf(lib.UrlFormat, *flagHost, lib.RouteAdd), lib.JsonMime, body); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		return exitErr
+		return lib.ExitErr
 	}
 	if buf, err = io.ReadAll(resp.Body); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		return exitErr
+		return lib.ExitErr
 	}
 
 	fmt.Println(string(buf))
-	return exitDef
+	return lib.ExitDef
 }

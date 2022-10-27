@@ -25,21 +25,21 @@ func ListMain() int {
 	flag.Parse()
 
 	// Fetch response from server
-	if res, err = http.Get(fmt.Sprintf(urlFormat, *flagHost, lib.RouteList)); err != nil {
+	if res, err = http.Get(fmt.Sprintf(lib.UrlFormat, *flagHost, lib.RouteList)); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		return exitErr
+		return lib.ExitErr
 	}
 	if buf, err = io.ReadAll(res.Body); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		return exitErr
+		return lib.ExitErr
 	}
 	if err = json.Unmarshal(buf, &jobMap); err != nil {
 		fmt.Fprintln(os.Stderr, err)
-		return exitErr
+		return lib.ExitErr
 	}
 	for _, job = range jobMap {
 		fmt.Printf("Name: \"%s\" Enabled: \"%t\" Command: \"%s\"\n", job.Name, job.Enabled, job.CmdName)
 	}
 
-	return exitDef
+	return lib.ExitDef
 }
