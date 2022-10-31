@@ -5,17 +5,17 @@ import (
 )
 
 const (
-	port = ":1106"
+	port      = ":1106"
+	msgFormat = "[%s] %s"
+	modKey    = "Module"
 )
 
 var (
-	logCap = 2
+	logCap = 256
 	logBuf []string
 )
 
 func main() {
-	logBuf = make([]string, 0, logCap)
-
 	http.HandleFunc("/list", apiList)
 	http.HandleFunc("/log", apiLog)
 
