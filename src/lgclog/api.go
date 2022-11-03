@@ -32,7 +32,7 @@ func apiLog(w http.ResponseWriter, r *http.Request) {
 
 	msg = fmt.Sprintf(msgFormat, mod[0], string(buf))
 
-	if len(logBuf) <= logCap {
+	if len(logBuf) <= int(*logCap) {
 		logBuf = append(logBuf, msg)
 		return
 	} else {

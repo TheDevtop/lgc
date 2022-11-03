@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"net/http"
 )
 
@@ -11,11 +12,16 @@ const (
 )
 
 var (
-	logCap = 256
+	logCap *uint
 	logBuf []string
 )
 
 func main() {
+	// Assign and parse flags
+	logCap = flag.Uint("c", 256, "Specify buffer size")
+	flag.Parse()
+
+	// Bind handlers
 	http.HandleFunc("/list", apiList)
 	http.HandleFunc("/log", apiLog)
 
