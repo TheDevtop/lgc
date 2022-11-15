@@ -6,9 +6,10 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"wap/api"
-	"wap/emu"
-	"wap/env"
+
+	"github.com/TheDevtop/lgc/lgcsrv/api"
+	"github.com/TheDevtop/lgc/lgcsrv/emu"
+	"github.com/TheDevtop/lgc/lgcsrv/env"
 )
 
 var (
