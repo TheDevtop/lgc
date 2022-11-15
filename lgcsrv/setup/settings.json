@@ -1,0 +1,11 @@
+{
+    "PubAddr": ":443",
+    "MgrAddr": ":8080",
+    "KeyFile": "setup/selfsigned.key",
+    "CertFile": "setup/selfsigned.crt",
+    "EnvMap": {},
+    "ApiTable": {
+      "/weather": "http://wttr.in/Amsterdam"
+    },
+    "LogSize": 32
+  }
