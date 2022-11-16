@@ -10,6 +10,7 @@ import (
 
 func usage() int {
 	fmt.Println("Usage: lgcadm [command] [options...]")
+	fmt.Println("Read the manpage for more information")
 	return lib.ExitErr
 }
 
@@ -18,12 +19,27 @@ func main() {
 		os.Exit(usage())
 	}
 	switch os.Args[1] {
+	// Found in cmd/log.go
 	case cmd.CmdName_GetLog:
 		os.Args = os.Args[1:]
 		os.Exit(cmd.GetLog_Main())
 	case cmd.CmdName_PutLog:
 		os.Args = os.Args[1:]
 		os.Exit(cmd.PutLog_Main())
+	// Found in cmd/env.go
+	case cmd.CmdName_GetVar:
+		os.Args = os.Args[1:]
+		os.Exit(cmd.GetVar_Main())
+	case cmd.CmdName_PutVar:
+		os.Args = os.Args[1:]
+		os.Exit(cmd.PutVar_Main())
+	// Found in cmd/api.go
+	case cmd.CmdName_GetRoute:
+		os.Args = os.Args[1:]
+		os.Exit(cmd.GetRoute_Main())
+	case cmd.CmdName_PutRoute:
+		os.Args = os.Args[1:]
+		os.Exit(cmd.PutRoute_Main())
 	default:
 		os.Exit(usage())
 	}
