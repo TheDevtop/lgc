@@ -2,6 +2,7 @@ package env
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -25,9 +26,11 @@ func HandleEnv(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPut || r.Method == http.MethodPost {
 		if v == "" {
 			delete(EnvMap, k)
+			log.Printf("Removed key \"%s\"\n", k)
 			return
 		}
 		EnvMap[k] = v
+		log.Printf("Added key \"%s\" with value \"%s\"\n", k, v)
 		return
 	}
 	if k == "" {

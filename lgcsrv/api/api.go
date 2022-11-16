@@ -30,6 +30,7 @@ func HandleMgmt(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPut || r.Method == http.MethodPost {
 		if dst == "" {
 			delete(ApiTable, src)
+			log.Printf("Removed route \"%s\"\n", src)
 			return
 		}
 		if _, err = url.Parse(dst); err != nil {
@@ -37,6 +38,7 @@ func HandleMgmt(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		ApiTable[src] = dst
+		log.Printf("Mapped route \"%s\" to \"%s\"\n", src, dst)
 		return
 	}
 	for src, dst = range ApiTable {

@@ -3,9 +3,12 @@
     "MgrAddr": ":8080",
     "KeyFile": "setup/selfsigned.key",
     "CertFile": "setup/selfsigned.crt",
-    "EnvMap": {},
+    "EnvMap": {
+      "hotel": "trivago"
+    },
     "ApiTable": {
       "/weather": "http://wttr.in/Amsterdam"
     },
     "LogSize": 32
   }
+  
