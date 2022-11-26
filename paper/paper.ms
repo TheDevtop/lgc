@@ -4,6 +4,12 @@ Little Green Clusters (Draft)
 Thijs Haker
 .AI
 Fontys Hogescholen
+.AB
+Improving the computation/energy efficiency ratio,
+by designing and implementing a service cluster,
+and a collection of microservices.
+With which small but rich network applications can be build.
+.AE
 .NH
 Problem statement:
 .PP
@@ -153,6 +159,25 @@ The rest of this section can be found in a seperate document called:
 .I "The design and implementation of LGC".
 .NH
 Conclusion:
+.PP
+Altough microservices and module oriented programming can improve efficiency by workload per unit.
+The increase in communication and networking makes any such system more complex overall.
+This isn't a problem when the communication is localized,
+as with channels and pipes.
+But in the era of multi-machine networking,
+the communication becomes the problem.
+.PP
+Therefore my conclusion and advice to any who reads this:
+Efficient software is only as effective as the system it's part of.
+And the hardware it's paired with,
+whether it's storage, networking, or compute.
 .NH 2
 Future work:
-
+.PP
+Reimplement LGC based on the same principles as the Plan 9 device
+.[
+plan9dev
+.]
+file servers.
+This makes the system more monolithic,
+but at the same time, it gives a simpler and more traditional interface.

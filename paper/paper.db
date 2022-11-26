@@ -56,6 +56,12 @@
 %D 1995
 %T Plan 9 from Bell Labs
 
+%K plan9dev
+%A Bell Laboratories
+%D 2022
+%T Plan 9 Devices
+%O https://9p.io/sys/man/3/INDEX.html
+
 %K runarch
 %A GitLab Inc.
 %D 21 July 2022
@@ -67,4 +73,3 @@
 %D 2022
 %T Why Go - Use cases
 %O https://go.dev/solutions/#use-cases
-
