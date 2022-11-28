@@ -15,12 +15,11 @@ import (
 func StopMain() int {
 	// Assign and parse flags
 	var (
-		flagName = flag.String("n", "job", "Specify job name")
+		flagName = flag.String("n", "", "Specify job name")
 		flagHost = flag.String("h", "localhost", "Specify cluster node")
 	)
 	flag.Parse()
 
-	// This function needs a lot of stuff
 	var (
 		buf  []byte
 		res  *http.Response
@@ -30,6 +29,7 @@ func StopMain() int {
 		pool map[string]string
 	)
 
+	// Read the pool
 	if pool, err = readPool(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return exitErr
@@ -50,6 +50,6 @@ func StopMain() int {
 		return exitErr
 	}
 
-	fmt.Println(string(buf))
+	fmt.Print(string(buf))
 	return exitDef
 }
