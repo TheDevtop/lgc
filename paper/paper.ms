@@ -20,6 +20,20 @@ Moreover, a subset of these medium sized jobs (like compiling software), run for
 Because of the risings in enegery cost, we would like to optimize our energy effeciency over computation.
 And because compiling software is very widespread we will focus on this job.
 .NH
+Research Method:
+.PP
+This project is going to be researched via the engineering method.
+.[
+method
+.]
+Which is considered the applied-science counterpart to the scientific method.
+This method is specified with prototype and research products in mind,
+not with appliance or industrial products.
+Conclusions and statements are made based on citations and sources.
+Solutions are based on,
+or in contrast with,
+prior work.
+.NH
 Background research:
 .PP
 Around 2008 the industry released their CPU's with the highest clock rate, 
@@ -82,9 +96,9 @@ and data locality.
 .[
 mesosarch
 .]
-Many of these things are out of scope.
-It would be an interesting idea to integrate LGC with Apache Mesos,
-but this would be considered future work.
+Many of these things are out of scope,
+and primarily contribute to the increasing of complexity.
+It could be an interesting idea to integrate LGC with Apache Mesos.
 .NH 2
 Plan 9:
 .PP
@@ -98,6 +112,9 @@ What makes Plan 9 interesting is it's file protocol called 9P.
 With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where local.
 Combining a remote filesystem with LGC would greatly simplify the operation of the cluster,
 and solve the data locality problem.
+Moreover,
+in Plan 9,
+the majority of operating system services are implemented as file servers that communicate via 9P.
 .NH 2
 Runners:
 .PP
@@ -151,7 +168,7 @@ It lends its microservice design from Kubernetes,
 k8sarch
 .]
 and is written in Go both for portability,
-and because it was made for system and server software.
+and because Go was made for system and server software.
 .[
 golang
 .]
@@ -167,6 +184,11 @@ as with channels and pipes.
 But in the era of multi-machine networking,
 the communication becomes the problem.
 .PP
+This project started as way to efficiently compile and link source code.
+But it has been generalized to provide a simple,
+general purpose,
+cluster orchistrator.
+.PP
 Therefore my conclusion and advice to any who reads this:
 Efficient software is only as effective as the system it's part of.
 And the hardware it's paired with,
@@ -174,10 +196,10 @@ whether it's storage, networking, or compute.
 .NH 2
 Future work:
 .PP
-Reimplement LGC based on the same principles as the Plan 9 device
+Reimplement LGC based on the same principles as Plan 9
+device servers.
 .[
 plan9dev
 .]
-file servers.
 This makes the system more monolithic,
 but at the same time, it gives a simpler and more traditional interface.
