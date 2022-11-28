@@ -4,44 +4,44 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"os/exec"
 )
 
-type JobDesc struct {
-	Name    string
-	Enabled bool
-	CmdName string
-	CmdArgs []string
+type JobForm struct {
+	Name string
+	Wdir string
+	Prog string
+	Args []string
+	Envs []string
 }
 
-type Job struct {
-	Desc JobDesc
-	Proc *exec.Cmd
+func ReadForm(rc io.ReadCloser) (JobForm, error) {
+	var jf = new(JobForm)
+	buf, _ := io.ReadAll(rc)
+	err := json.Unmarshal(buf, jf)
+	return *jf, err
 }
 
-// Read and convert json to JobDesc
-func ReadJobDesc(rc io.ReadCloser) (JobDesc, error) {
-	var (
-		buf []byte
-		err error
-		jd  = new(JobDesc)
-	)
-
-	buf, _ = io.ReadAll(rc)
-	err = json.Unmarshal(buf, jd)
-	return *jd, err
-}
-
-// Write JobDesc to json
-func WriteJobDesc(w io.Writer, jdPtr *JobDesc) error {
-	var (
-		buf []byte
-		err error
-	)
-
-	if buf, err = json.Marshal(jdPtr); err != nil {
+func WriteForm(w io.Writer, jf *JobForm) error {
+	if buf, err := json.Marshal(jf); err != nil {
 		return err
+	} else {
+		fmt.Fprint(w, string(buf))
+		return nil
 	}
-	fmt.Fprint(w, string(buf))
-	return nil
+}
+
+func ReadList(rc io.ReadCloser) ([]JobForm, error) {
+	var jl = make([]JobForm, 2)
+	buf, _ := io.ReadAll(rc)
+	err := json.Unmarshal(buf, &jl)
+	return jl, err
+}
+
+func WriteList(w io.Writer, jl []JobForm) error {
+	if buf, err := json.Marshal(&jl); err != nil {
+		return err
+	} else {
+		fmt.Fprint(w, string(buf))
+		return nil
+	}
 }
