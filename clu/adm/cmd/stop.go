@@ -15,8 +15,9 @@ import (
 func StopMain() int {
 	// Assign and parse flags
 	var (
+		flagFile = flag.String("f", filePath, "Specify configuration file")
 		flagName = flag.String("n", "", "Specify job name")
-		flagHost = flag.String("h", "localhost", "Specify cluster node")
+		flagHost = flag.String("h", "", "Specify cluster node")
 	)
 	flag.Parse()
 
@@ -30,7 +31,7 @@ func StopMain() int {
 	)
 
 	// Read the pool
-	if pool, err = readPool(); err != nil {
+	if pool, err = readPool(*flagFile); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return exitErr
 	}

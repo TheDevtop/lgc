@@ -17,12 +17,13 @@ import (
 func StartMain() int {
 	// Assign and parse flags
 	var (
+		flagFile = flag.String("f", filePath, "Specify configuration file")
 		flagName = flag.String("n", "", "Specify job name")
 		flagHost = flag.String("h", "", "Specify cluster node")
-		flagProg = flag.String("p", "", "Specify program path")
-		flagWdir = flag.String("d", ".", "Specify working directory")
-		flagArg  = flag.String("a", "", "Specify arguments")
-		flagEnv  = flag.String("e", "", "Specify environment")
+		flagProg = flag.String("p", "", "Specify job program")
+		flagWdir = flag.String("d", workingDir, "Specify job working directory")
+		flagArg  = flag.String("a", "", "Specify job arguments")
+		flagEnv  = flag.String("e", "", "Specify job environment")
 	)
 	flag.Parse()
 
@@ -33,11 +34,11 @@ func StartMain() int {
 		body *bytes.Reader
 		err  error
 		jf   = new(lib.JobForm)
-		pool map[string]string // Map of nodes to hostnames
+		pool map[string]string
 	)
 
 	// Read the pool
-	if pool, err = readPool(); err != nil {
+	if pool, err = readPool(*flagFile); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return exitErr
 	}

@@ -3,6 +3,7 @@ package cmd
 import (
 	"clu/adm/lib"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
@@ -11,6 +12,10 @@ import (
 
 // Print list of jobs of all the nodes
 func ListMain() int {
+	// Assign and parse flags
+	var flagFile = flag.String("f", filePath, "Specify configuration file")
+	flag.Parse()
+
 	var (
 		buf      []byte
 		jl       []lib.JobForm
@@ -22,7 +27,7 @@ func ListMain() int {
 		srvAddr  string
 	)
 
-	if pool, err = readPool(); err != nil {
+	if pool, err = readPool(*flagFile); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return exitErr
 	}

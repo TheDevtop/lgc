@@ -7,19 +7,20 @@ import (
 )
 
 const (
-	filePath = "./cluster.json"
-	exitDef  = 0
-	exitErr  = 1
+	filePath   = "/etc/cluster.json"
+	workingDir = "."
+	exitDef    = 0
+	exitErr    = 1
 )
 
-func readPool() (map[string]string, error) {
+func readPool(path string) (map[string]string, error) {
 	var (
 		buf  []byte
 		err  error
 		pool map[string]string
 	)
 
-	if buf, err = os.ReadFile(filePath); err != nil {
+	if buf, err = os.ReadFile(path); err != nil {
 		return nil, err
 	}
 	if err = json.Unmarshal(buf, &pool); err != nil {

@@ -62,7 +62,7 @@ func handleStart(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if _, ok = jobMap[jf.Name]; ok {
-		log.Printf("Job %s already enqueued\n", jf.Name)
+		log.Printf("Job: %s already enqueued\n", jf.Name)
 		return
 	}
 
@@ -78,6 +78,8 @@ func handleStart(w http.ResponseWriter, r *http.Request) {
 	// Start job
 	if err = jobMap[jf.Name].Start(); err != nil {
 		log.Println(err)
+		delete(jobMap, jf.Name)
+		return
 	}
 	log.Printf("Started job: %s\n", jf.Name)
 }
@@ -95,7 +97,7 @@ func handleStop(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if _, ok = jobMap[jf.Name]; !ok {
-		log.Printf("Job %s already dequeued\n", jf.Name)
+		log.Printf("Job: %s already dequeued\n", jf.Name)
 		return
 	}
 
