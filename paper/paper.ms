@@ -1,5 +1,5 @@
 .TL
-Little Green Clusters (Draft)
+Little Green Clusters
 .AU
 Thijs Haker
 .AI
@@ -177,29 +177,28 @@ The rest of this section can be found in a seperate document called:
 .NH
 Conclusion:
 .PP
-Altough microservices and module oriented programming can improve efficiency by workload per unit.
+Altough service and module oriented programming can improve efficiency by workload per unit.
 The increase in communication and networking makes any such system more complex overall.
 This isn't a problem when the communication is localized,
 as with channels and pipes.
-But in the era of multi-machine networking,
-the communication becomes the problem.
+But in the era of massive networking,
+the communication becomes the problem (via it's complexity).
 .PP
 This project started as way to efficiently compile and link source code.
 But it has been generalized to provide a simple,
 general purpose,
 cluster orchistrator.
+Yet it did not succeed at either of those tasks.
+The primairy reason,
+being that I had a couple of somewhat connected inclinations,
+but not a clear picture of what was missing in conventional (UNIX) operating systems.
+The seconday reason,
+being that both Kubernetes,
+and Plan 9 solved this problem,
+but both in different ways.
 .PP
 Therefore my conclusion and advice to any who reads this:
-Efficient software is only as effective as the system it's part of.
-And the hardware it's paired with,
-whether it's storage, networking, or compute.
-.NH 2
-Future work:
-.PP
-Reimplement LGC based on the same principles as Plan 9
-device servers.
-.[
-plan9dev
-.]
-This makes the system more monolithic,
-but at the same time, it gives a simpler and more traditional interface.
+Figure out what made Kubernetes,
+and Plan 9 capable,
+to make of unrelated machines,
+cohesive clusters.
