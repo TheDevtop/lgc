@@ -3,27 +3,56 @@
 %D 2022
 %T Title
 
+%K health
+%A Brigham and Womens Hospital Communications
+%D 8 September 2022
+%T Dramatic rise in cancer in people under 50
+%O https://news.harvard.edu/gazette/story/2022/09/researchers-report-dramatic-rise-in-early-onset-cancers/
+
+%K datacenter
+%A Bill Weihl, Erik Teetzel, Jimmy Clidaras, Chris Malone, Joe Kava, Michael Ryan
+%D 1 June 2011
+%T Sustainable data centers
+
+%K ghosh
+%A Sukumar Ghosh
+%D 2015
+%T Distributed Systems: An Algorithmic Approach
+
+%K pike
+%A Rob Pike
+%D 11 January 2012
+%T Concurrency is not Parallelism
+
+%K ewd65
+%A E.W. Dijkstra
+%D 1965
+%T Solution of a problem in concurrent programming control
+
+%K ewd68
+%A E.W. Dijkstra
+%D 1968
+%T Co-operating sequential processes
+
+%K ewd75
+%A E.W. Dijkstra
+%D 1975
+%T Nondeterminacy and Formal Derivation of Programs
+
+%K actor
+%A Carl Hewitt, Peter Bishop, Richard Steiger
+%D 20 August 1973
+%T A universal modular ACTOR formalism for artificial intelligence
+
+%K csp
+%A C.A.R. Hoare
+%D 1985
+%T Communicating Sequential Processes
+
 %K moore65
 %A Gorden E. Moore
 %D 1965
 %T Cramming more components onto integrated circuits
-
-%K cpufreq
-%A IEEE
-%D 31 March 2008
-%T Why CPU Frequency Stalled
-
-%K dvfs
-%A Etienne Le Sueur
-%A Gernot Heiser
-%D 2013
-%T Dynamic Voltage and Frequency Scaling: The Laws of Diminishing Returns
-
-%K method
-%A Ron Lasser
-%D 2013
-%T Engineering Method
-%O https://sites.tufts.edu/eeseniordesignhandbook/2013/engineering-method/
 
 %K pi4
 %A Raspberry Pi Foundation
@@ -36,14 +65,6 @@
 %D 28 July 2021
 %T Status of Supported Architectures from Maintainers' Point of View
 %O https://gcc.gnu.org/backends.html
-
-%K overhead
-%A Zheng Li
-%A Maria Kihl
-%A Qinghua Lu
-%A Jens A. Anderson
-%D May 2017
-%T Performance Overhead Comparison between Hypervisor and Container Based Virtualization
 
 %K k8sarch
 %A The Kubernetes Authors

@@ -5,200 +5,198 @@ Thijs Haker
 .AI
 Fontys Hogescholen
 .AB
-Improving the computation/energy efficiency ratio,
-by designing and implementing a service cluster,
-and a collection of microservices.
-With which small but rich network applications can be build.
+(...)
 .AE
 .NH
-Problem statement:
+Introduction:
 .PP
-Since the dawn of computing in the 1960's, there is, and has been, a consistent tendency to run medium to high workloads on high power machines.
-This is a reasonable way to do computing, except that there is significant power wastage when running medium sized jobs.
-Moreover, a subset of these medium sized jobs (like compiling software), run for longer periods of time, increasing the overall power consumption.
+In our current world,
+there is an abundance of both communication,
+and computation.
+It has supercharged both the speed,
+and the amount of information we can send and receive.
+Even more miraculous,
+we can do this with machines smaller then textbooks.
+Yet most processing and storage of this information happens at large,
+environment unfriendly,
+datacenters.
 .PP
-Because of the risings in enegery cost, we would like to optimize our energy effeciency over computation.
-And because compiling software is very widespread we will focus on this job.
+Would it not be possible?
+To use this abundance of communication to transform a set of loosely connected machines;
+into a functional,
+efficient,
+.I distributed
+system.
+.NH 2
+Questions:
+.PP
+The primairy question for this research is:
+How do distributed systems generally work?
+The secondary question is:
+Does the communication involved,
+diminish the returns of a distributed system?
+The tertiary,
+and applicable question:
+Can a distributed system be utilized effectively,
+to process complex data (more specifically: Analyse DNA)?
+.NH 2
+Relevancy:
+.PP
+The relevancy of this research is twofold.
+First,
+there is climate change,
+and the associated need to increase efficiency,
+and decrease environmental impact.
+.[
+datacenter
+.]
+Second,
+the increase in cancer rates among people under 50,
+.[
+health
+.]
+increases the need for both better tooling,
+and better treatment.
+.PP
+My conjecture for this research,
+is that both these problems can benefit from distributed systems.
 .NH
-Research Method:
+Methodology:
 .PP
-This project is going to be researched via the engineering method.
-.[
-method
-.]
-Which is considered the applied-science counterpart to the scientific method.
-This method is specified with prototype and research products in mind,
-not with appliance or industrial products.
-Conclusions and statements are made based on citations and sources.
-Solutions are based on,
-or in contrast with,
-prior work.
-.NH
-Background research:
+To answer the three research questions,
+and possibly solve the two relevancy problems.
+I will start with the gathering of theoretical models for distributed systems.
+These models will be sourced,
+with a preference for known publishers like:
+Academia,
+ACM,
+Elsevier,
+Jstor,
+and Google Scholar.
+With these models I will answer the first question.
+Then I will gather information about implementations that follow these models,
+this will be done with the second,
+and third question in mind.
+After which I will compile the common atributes between the implementations,
+and use them as requirements for my system.
+Finally I will attempt to implement a distributed system, with 
+.B Relevancy
+in mind.
+.NH 2
+Literature:
 .PP
-Around 2008 the industry released their CPU's with the highest clock rate, 
-and going any higher is considered not worth the cost in terms of power consumed and heat dissipated.
+To understand distributed systems,
+we first have to look at
+.I "concurrency."
 .[
-cpufreq
+ghosh
 .]
-There are methods for the mitigation of power consumption.
-But with the advent of multiple cores,
-these methods yielded diminished returns.
+Concurrency is the composition of independently executing computations,
 .[
-dvfs
+pike
 .]
+which is not the same as parallelism.
+Altough these computations may,
+or may not be executing on the same machine.
+In both cases they need to solve the same problem.
+This is Dijkstra's
+.I "Dining philosophers"
+problem.
+So to have a distributed system,
+is to have a concurrent system,
+and a concurrent system is to have a model,
+.[
+ewd68
+.]
+that is effective at solving the dining philosophers problem.
+.[
+ewd65
+.]
+.PP
+There are many such models,
+but only two are widely used,
+and therefore,
+I will only take a deeper look at those two.
+These models are:
+.I "The Actor model"
+and,
+the model of
+.I "Communicating sequential processes."
+.SH
+The Actor Model:
+.PP
+The actor model
+.[
+actor
+.]
+is a model for concurrency that treats an
+.I actor
+as the universal primitive.
+An actor can do several (concurrent) things when respoding to a message from other actors:
+.IP \[bu]
+Send a finite number of messages to other actors.
+.IP \[bu]
+Create a finite number of new actors.
+.IP \[bu]
+Determine the behavior to be used for the next message it receives.
+.PP
+Having the actor as universal primitive makes it suitable for usage in conventional object oriented languages,
+and makes sense when solving the dining philosophers problem (philosophers are also actors).
 However,
-the combination of multiple low powered CPU cores stike an optimal balance between effeciency and computation.
-Contemporary computers with this design include the Raspberry Pi
-.[
-pi4
-.]
-and the Pine64.
+the actor model does not make a destinction between actors as processes,
+and actors as messages (everything is an actor).
+This increases the complexity of any implementation using this model significantly.
+.SH
+Communicating Sequential Processes:
 .PP
-Because our goal is to compile software,
-we are required to assume the existence of multiple OS/Architecture combinations.
+CSP is a formal model/language 
 .[
-gccarch
+csp
 .]
-We could solve this problem via emulation,
-however this can (depending on the workload) introduce significant overhead,
+for interactions between independent processes.
+It is based on Dijkstra's guarded commands.
 .[
-overhead
+ewd75
 .]
-even more so on a low powered machine.
-A much simpler option is to have a set of centrally orchestrated computers,
-here the only bottleneck is the supported architectures of the orchestration software.
-This type of software is known as "cluster orchestation" software.
-.NH
-Product research:
+The primitives of this model are:
+Values,
+processes,
+and channels.
+Values are as-is.
+Processes take in values,
+modify them,
+and put out modfied values (like mathmatical functions).
+Channels synchronise the flow of values from one process to the other.
 .PP
-Since the breaktrough of cloud computing in the 2010's,
-there have been several products that orchestrate and coordinate clusters.
-In this section we will cover a few:
+With this model it is possible to construct any concurrent system,
+whether executed in parallel,
+or not.
+Because of it's three distinctive primitives,
+it maps very well to any type of programming language,
+and can even be used in other mathmatical fields.
+It is also possible to solve the dining philosophers problem in numerous ways,
+and implementations can be realised with relatively little effort.
 .NH 2
-Kubernetes:
+Implementations:
 .PP
-Kubernetes is a popular cluster orchestrator for application containers.
-.[
-k8sarch
-.]
-It's primarily made for datacenter size installations,
-it has many features which makes it less suitable for our deployment situation.
-However the overall architecture is highly structured and a good starting point for our system.
-.NH 2 
-Apache Mesos:
-.PP
-Mesos is a cluster scheduler,
-it's possible to attach other cluster software (like Kubernetes) to it.
-Altough it poses many interesting ideas about scheduling,
-networking,
-and data locality.
-.[
-mesosarch
-.]
-Many of these things are out of scope,
-and primarily contribute to the increasing of complexity.
-It could be an interesting idea to integrate LGC with Apache Mesos.
+
 .NH 2
-Plan 9:
-.PP
-This is the operating system developed after Bell Labs ended with UNIX.
-It is not a cluster orchestrator,
-but rather a distributed operating system.
-.[
-plan9arch
-.]
-What makes Plan 9 interesting is it's file protocol called 9P.
-With 9P it is possible for CPU servers (compute nodes) to see a remote filesystem as if it where local.
-Combining a remote filesystem with LGC would greatly simplify the operation of the cluster,
-and solve the data locality problem.
-Moreover,
-in Plan 9,
-the majority of operating system services are implemented as file servers that communicate via 9P.
-.NH 2
-Runners:
-.PP
-GitLab Runners are part of the GitLab CI/CD system,
-with which build jobs can be executed.
-It has many features which won't be considered for LGC,
-but it's programming model/execution flow,
-.[
-runarch
-.]
-is simple enough to be implemented by a single person.
-Altough it is not cluster orchistrator,
-it can be used in a distributed manner.
-.NH
 Requirements:
-.IP \1
-The user can pick and choose which parts of the cluster to deploy.
-.IP \2
-The user can publish a service to the cluster.
-.IP \3
-The user can bind a published service to the API server.
-.IP \4
-The service can retrieve/store state from a centrally managed database.
-.IP \5
-The service can output it's messages to a centrally managed logging system.
-.IP \6
-The service can have any underlying system or platform.
-.IP \6
-The user can manage the cluster via the operating system console.
+.PP
+(...)
 .NH
-Evaluation:
+Results:
 .PP
-There are two ways to solve this problem:
-The first option is to build a cluster orchistrator that manages services,
-and makes them exportable to the internet.
-This will make the implementation of any build service secondary.
-The second option is to build a multi-node build service,
-this will be easier but will exclude the implementation of a full cluster orchestrator.
+(...)
+.NH 2
+Validation:
 .PP
-In the end I decided to design and implement a cluster orchistrator.
-For both the reason that my interests are more aligned,
-and the reason that there is more space to innovate.
-.NH
-Design & Implementation:
-.PP
-Little Green Cluster or
-.B "LGC",
-is a portable and elegant orchestration system for small computer clusters.
-It lends its microservice design from Kubernetes,
-.[
-k8sarch
-.]
-and is written in Go both for portability,
-and because Go was made for system and server software.
-.[
-golang
-.]
-The rest of this section can be found in a seperate document called:
-.I "The design and implementation of LGC".
+(...)
 .NH
 Conclusion:
 .PP
-Altough service and module oriented programming can improve efficiency by workload per unit.
-The increase in communication and networking makes any such system more complex overall.
-This isn't a problem when the communication is localized,
-as with channels and pipes.
-But in the era of massive networking,
-the communication becomes the problem (via it's complexity).
+(...)
+.NH 2
+Recommendation:
 .PP
-This project started as way to efficiently compile and link source code.
-But it has been generalized to provide a simple,
-general purpose,
-cluster orchistrator.
-Yet it did not succeed at either of those tasks.
-The primairy reason,
-being that I had a couple of somewhat connected inclinations,
-but not a clear picture of what was missing in conventional (UNIX) operating systems.
-The seconday reason,
-being that both Kubernetes,
-and Plan 9 solved this problem,
-but both in different ways.
-.PP
-Therefore my conclusion and advice to any who reads this:
-Figure out what made Kubernetes,
-and Plan 9 capable,
-to make of unrelated machines,
-cohesive clusters.
+(...)
