@@ -56,16 +56,19 @@ and decrease environmental impact.
 .[
 datacenter
 .]
+Distributed compting can help here,
+when combined with small power-efficient computers.
 Second,
 the increase in cancer rates among people under 50,
 .[
 health
 .]
-increases the need for both better tooling,
-and better treatment.
-.PP
-My conjecture for this research,
-is that both these problems can benefit from distributed systems.
+increases the need for both more,
+and better tooling.
+Distributed computing can help here,
+by providing a way to run many DNA analyses concurrently.
+Thus my conjecture for this research,
+is that both these problems can benefit from distributed computing.
 .NH
 Methodology:
 .PP
@@ -232,11 +235,11 @@ Plan 9 (Operating System):
 .PP
 Plan 9 is a distributed operating system.
 That consists of a small kernel,
-a small collection of kernel-space device servers,
+a small collection of kernel-mode device servers,
 .[
 plan9dev
 .]
-and a larger collection of user-space file servers that implement the 9P protocol.
+and a larger collection of user-mode file servers that implement the 9P protocol.
 .[
 plan9arch
 .]
@@ -293,12 +296,12 @@ The architecture of OpenStack
 .[
 openstack
 .]
-does provide a good overview of the functional components of a distributed system.
+does provide a good overview of the architectural components of a distributed system.
 For example:
 Nova and Zun implement the compute functionality,
 Swift and Cinder implement storage functionality,
 and Neutron and Octavia provide networking.
-These are the same functional components
+These are the same architectural components
 .I "(network, storage, and compute)"
 found in other distributed systems.
 .NH 3
@@ -323,6 +326,26 @@ the codebase is huge.
 Add the fact that Ceph is a storage solution,
 which needs another distributed system for computation,
 increases the total complexity again.
+.NH 3
+Cwfs (Filesystem):
+.PP
+The Cached-WORM Filesystem Server,
+is the user-mode implementation of the original (kernel-mode) file server.
+.[
+plan9fs
+.]
+Cwfs lies at the center of any Plan 9 installation,
+and makes it possible for many machines to function as a cohesive system.
+Cwfs follows (like Plan 9) the CSP concurrency model,
+but is in and of itself not a distributed filesystem.
+Even when many clients (Plan 9 kernels) are connected,
+does Cwfs perform well.
+It archieves this by having a client-side in-memory file cache.
+Which relieves the server-side file cache,
+and its associated on-disk filesystem (WORM).
+Having a cache on each side,
+greatly reduces the amount of messaging involved,
+and decreases the access time of frequently used files.
 .NH 2
 Requirements:
 .PP
@@ -341,7 +364,7 @@ or a consistent set of interfaces.
 .IP \4
 LGC should implement,
 or at least consider,
-all the functional components (network, storage, and compute).
+all the architectural components (network, storage, and compute).
 .IP \5
 LGC should integrate with existing software,
 where possible.
@@ -363,9 +386,5 @@ Conclusion:
 (...)
 .NH 2
 Recommendation:
-.PP
-(...)
-.SH
-Acknowledgments
 .PP
 (...)
