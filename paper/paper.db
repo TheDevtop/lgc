@@ -1,5 +1,6 @@
 %K label
 %A Author name
+%I Institution
 %D 2022
 %T Title
 
@@ -19,8 +20,9 @@
 %D 2015
 %T Distributed Systems: An Algorithmic Approach
 
-%K pike
+%K pike12
 %A Rob Pike
+%I Google Inc.
 %D 11 January 2012
 %T Concurrency is not Parallelism
 
@@ -49,22 +51,11 @@
 %D 1985
 %T Communicating Sequential Processes
 
-%K moore65
-%A Gorden E. Moore
-%D 1965
-%T Cramming more components onto integrated circuits
-
-%K pi4
-%A Raspberry Pi Foundation
-%D 24 June 2019
-%T Raspberry Pi 4 Tech Specs
-%O https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/
-
-%K gccarch
-%A Free Software Foundation
-%D 28 July 2021
-%T Status of Supported Architectures from Maintainers' Point of View
-%O https://gcc.gnu.org/backends.html
+%K unix
+%A Dennis M. Ritchie, Ken Thompson
+%I Bell Laboratories
+%D 1974
+%T The UNIX Time-Sharing System
 
 %K k8sarch
 %A The Kubernetes Authors
@@ -79,24 +70,58 @@
 %O https://mesos.apache.org/documentation/latest/architecture/
 
 %K plan9arch
-%A Bell Laboratories
+%A Rob Pike, Dave Presotto, Ken Thompson, Sean Dorward, Bob Flandrena, Howard Trickey, Phil Winterbottom
+%I Bell Laboratories
 %D 1995
 %T Plan 9 from Bell Labs
 
+%K plan9ns
+%A Rob Pike, Dave Presotto, Ken Thompson, Sean Dorward, Bob Flandrena, Howard Trickey, Phil Winterbottom
+%I Bell Laboratories
+%D 1995
+%T The Use of Name Spaces in Plan 9
+
+%K plan9fs
+%A Ken Thompson, Geoff Collyer
+%I Bell Laboratories
+%T The 64-bit Standalone Plan 9 File Server
+
 %K plan9dev
-%A Bell Laboratories
+%A Alcatel-Lucent
 %D 2022
 %T Plan 9 Devices
 %O https://9p.io/sys/man/3/INDEX.html
 
-%K runarch
-%A GitLab Inc.
-%D 21 July 2022
-%T GitLab Runner
-%O https://docs.gitlab.com/runner/
+%K drawterm
+%A Alcatel-Lucent
+%D 2022
+%T Drawterm
+%O https://9p.io/magic/man2html/8/drawterm
+
+%K shard
+%A Sikha Bagui, Loi Nguyen
+%D April 2015
+%T Database Sharding: To Provide Fault Tolerance and Scalability of Big Data on the Cloud
+
+%K openstack
+%A The OpenInfra Foundation
+%T OpenStack: Software
+%O https://www.openstack.org/software/
+
+%K Ceph
+%A Sage A. Weil, Scott A. Brandt, Ethan L. Miller, Darrell D. E. Long
+%I University of California Santa Cruz
+%D 2006
+%T Ceph: A Scalable, High-Performance Distributed File System
 
 %K golang
 %A Google Inc.
 %D 2022
 %T Why Go - Use cases
 %O https://go.dev/solutions/#use-cases
+
+%K erlang
+%A Joe Armstrong
+%D 20 November 2003
+%T Making reliable distributed systems in the presence of software errors
+%O https://erlang.org/download/armstrong_thesis_2003.pdf
