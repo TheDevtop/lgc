@@ -47,6 +47,42 @@ func HandleMgmt(w http.ResponseWriter, r *http.Request) {
 }
 
 // Handle the incoming requests
+func HandleNewApi(w http.ResponseWriter, r *http.Request) {
+	var (
+		route string
+		ok    bool
+		err   error
+		pu    *url.URL
+		pr    *http.Response
+	)
+
+	if route, ok = ApiTable[r.URL.Path]; !ok {
+		http.NotFound(w, r)
+		return
+	}
+	if pu, err = url.Parse(route); err != nil {
+		log.Println(err)
+		return
+	}
+
+	r.Host = pu.Host
+	r.URL.Host = pu.Host
+	r.URL.Path = pu.Path
+	r.URL.Scheme = pu.Scheme
+	//r.URL.RawQuery = pu.RawQuery
+	r.RequestURI = ""
+
+	if pr, err = http.DefaultClient.Do(r); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	io.Copy(w, pr.Body)
+}
+
+// Handle the incoming requests
 func HandleApi(w http.ResponseWriter, r *http.Request) {
 	var (
 		route string
