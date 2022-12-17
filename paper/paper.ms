@@ -5,10 +5,10 @@ Thijs Haker
 .AI
 Fontys Hogescholen
 .AB
-Is it possible to create a lightweight distributed system?
-Given the literature of contemporary systems.
+Is it possible to create a lightweight distributed system,
+based on the available literature and contemporary implementations?
 Building a small,
-eco-friendly system,
+eco-friendly distributed system,
 capable of analysing DNA.
 Showing to the world the elegance,
 and potential of distributed computing.
@@ -28,7 +28,7 @@ environment unfriendly,
 datacenters.
 .PP
 Would it not be possible?
-To use this abundance of communication to transform a set of loosely connected machines;
+To use this abundance of communication to transform a set of networked machines;
 into a functional,
 efficient,
 .I distributed
@@ -36,13 +36,15 @@ system.
 .NH 2
 Questions:
 .PP
-The primairy question for this research is:
+The main question for this research is:
+Can I make an enery-efficient distributed system?
+The secondary questions are:
+.IP \1
 How do distributed systems generally work?
-The secondary question is:
+.IP \2
 Does the communication involved,
 diminish the returns of a distributed system?
-The tertiary,
-and applicable question:
+.IP \3
 Can a distributed system be utilized effectively,
 to process complex data (more specifically: Analyse DNA)?
 .NH 2
@@ -66,7 +68,7 @@ health
 increases the need for both more,
 and better tooling.
 Distributed computing can help here,
-by providing a way to run many DNA analyses concurrently.
+by concurrently searching for known gene expressions.
 Thus my conjecture for this research,
 is that both these problems can benefit from distributed computing.
 .NH
@@ -74,6 +76,8 @@ Methodology:
 .PP
 To answer the three research questions,
 and possibly solve the two relevancy problems.
+I need to study the relevant literature related to distributed computing.
+Because I need to understand it before I can implement such a thing.
 I will start with the gathering of theoretical models for distributed systems.
 These models will be sourced,
 with a preference for known publishers like:
@@ -91,6 +95,24 @@ and use them as requirements for my system.
 Finally I will attempt to implement a distributed system, with 
 .B Relevancy
 in mind.
+.NH 2
+Meaning:
+.PP
+To get a better grasp on our main question,
+I will dissect it and offer an explaination.
+The question:
+Can I
+.I make
+an 
+.I enery-efficient 
+.I "distributed system?"
+.PP
+With the first cursive word 'make' I mean to implement the core functionality myself,
+but to use existing solutions for the supporting functionality.
+With the words 'energy efficient' I mean designing to use as little resources (processor time, memory, network bandwith) as possible.
+With the idea that this software is able to run on low power machines.
+Finally the words 'distributed system' refer to a set of computers,
+that all run a particulair set of programs that allow them to communicate to achieve a certain goal.
 .NH 2
 Literature:
 .PP
@@ -349,9 +371,12 @@ and decreases the access time of frequently used files.
 .NH 2
 Requirements:
 .PP
-Given the common attributes of both theoretical models,
+While researching both theoretical models,
 and practical implementations.
-Little Green Clusters (LGC) should achieve the following requirements:
+I noticed a set of attributes common to most,
+if not all pieces of literature.
+Given these common attributes,
+Little Green Clusters (LGC) should conform to the following requirements:
 .IP \1
 The model of concurrency should both be correct,
 and simple to implement.
